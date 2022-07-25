@@ -1,25 +1,25 @@
 import axios from "axios";
 
+//função para saber o statos da API.
 function getApi(x) {
-  var a = "api online";
-  var b = "api offline";
-
   if (x == true) {
-    return <h1>{a}</h1>;
+    return <p>API online</p>;
   } else if (x == false) {
-    return <h1>{b}</h1>;
+    return <p>API offline</p>;
   }
 }
 
+//imprimindo na tela a frase pedida e o resultado. 
 const Index = ({ dados }) => (
   <div className="container">
-      <center>
+    <center>
       <h1>Doação de computadores usados</h1>
       {getApi(dados)}
     </center>
   </div>
 );
 
+//consumindo a API com axios.
 Index.getInitialProps = async () => {
   const response = await axios.get(
     "https://doar-computador-api.herokuapp.com/"
