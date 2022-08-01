@@ -11,12 +11,13 @@ export function FormPersonal({
 }) {
   return (
     <div className={styles.form}>
-     <h2 className={styles.title.h2}>Formulário de Doação</h2>
+      <h2 className={styles.title.h2}>Formulário de Doação</h2>
       <div>
-        <InputMask id="name" name="name" placeholder="nome" />
-        <InputMask id="email" type="email" name="email" placeholder="email" />
-        <InputMask id="phone" name="phone" placeholder="telefone" mask="99 999999999" />
+        <InputMask className={styles.card} id="name" name="name" placeholder="nome" />
+        <InputMask className={styles.card} id="email" type="email" name="email" placeholder="email" />
+        <InputMask className={styles.card} id="phone" name="phone" placeholder="telefone" mask="99 999999999" />
         <InputMask
+          className={styles.card}
           id="zip"
           name="zip"
           placeholder="cep"
@@ -27,18 +28,18 @@ export function FormPersonal({
           }}
         />
         {isLoading && <span>Carregando</span>}
-        <InputMask id="city" name="city" placeholder="cidade" />
-        <InputMask id="state" name="state" placeholder="estado" />
-        <InputMask id="neighborhood" name="neighborhood" placeholder="Bairro" />
-        <InputMask id="streetAddress" name="streetAddress" placeholder="rua" />
-        <InputMask id="number" name="number" placeholder="número" />
-        <InputMask id="complement" name="complement" placeholder="complemento" />
+        <InputMask className={styles.card} id="city" name="city" placeholder="cidade" />
+        <InputMask className={styles.card} id="state" name="state" placeholder="estado" />
+        <InputMask className={styles.card} id="neighborhood" name="neighborhood" placeholder="Bairro" />
+        <InputMask className={styles.card} id="streetAddress" name="streetAddress" placeholder="rua" />
+        <InputMask className={styles.card} id="number" name="number" placeholder="número" />
+        <InputMask className={styles.card} id="complement" name="complement" placeholder="complemento" />
       </div>
 
       <div className={styles.form}>
         <h2>Equipamentos que serão doados</h2>
         <p>Quantidade de equipamentos</p>
-        <InputMask className={styles.card} min="1" type="number" name="deviceCount"
+        <InputMask className={styles.box} min="1" type="number" name="deviceCount"
           onChange={({ target }) => {
             handleCreateDevice(target.value);
             handleDeleteDevice(target.value);
