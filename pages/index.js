@@ -10,7 +10,7 @@ import { fetchCep } from './util/fetchcep';
 import { testeDevice } from './util/testedevice';
 import Image from 'next/image';
 
-export default function Home({dados}) {
+export default function Home({ dados }) {
   const formRef = useRef();
   const [loading, setLoading] = useState(false);
   const [devices, setDevices] = useState([{ value: '', label: '' }]);
@@ -21,10 +21,10 @@ export default function Home({dados}) {
 
     fetchCep(value).then((response) => {
       if (response.city !== undefined) {
-        document.getElementById('state').value= response.state;
-        document.getElementById('city').value= response.city;
-        document.getElementById('streetAddress').value= response.streetAddress;
-        document.getElementById('neighborhood').value= response.neighborhood;
+        document.getElementById('state').value = response.state;
+        document.getElementById('city').value = response.city;
+        document.getElementById('streetAddress').value = response.streetAddress;
+        document.getElementById('neighborhood').value = response.neighborhood;
         document.getElementById('number').focus();
       }
       setLoading(false);
@@ -48,7 +48,7 @@ export default function Home({dados}) {
 
   async function handleFormSubmit(form) {
     form.deviceCount = parseInt(form.deviceCount);
- 
+
     const data = JSON.stringify(form);
 
     try {
@@ -58,14 +58,15 @@ export default function Home({dados}) {
           setDevicesError(true);
         } else setDevicesError(false);
       });
-  
+
       const devicesPassed = await testeDevice(form);
-    
+
       if (devicesPassed.value == true) {
         api
           .post('/donation', data)
           .then((response) => {
             alert('Enviado' + response.status);
+            window.location.reload(false);
           })
           .catch((error) => {
             alert(

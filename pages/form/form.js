@@ -13,10 +13,11 @@ export function FormPersonal({
     <div className={styles.form}>
      <h2 className={styles.title.h2}>Formulário de Doação</h2>
       <div>
-        <InputMask name="name" placeholder="nome" />
-        <InputMask type="email" name="email" placeholder="email" />
-        <InputMask name="phone" placeholder="telefone" mask="99 999999999" />
+        <InputMask id="name" name="name" placeholder="nome" />
+        <InputMask id="email" type="email" name="email" placeholder="email" />
+        <InputMask id="phone" name="phone" placeholder="telefone" mask="99 999999999" />
         <InputMask
+          id="zip"
           name="zip"
           placeholder="cep"
           mask="99999999"
