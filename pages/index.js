@@ -132,7 +132,7 @@ export default function Home({ dados }) {
         <a
           href="https://www.appmasters.io/"
           target="_blank"
-          rel="App Masters"
+          rel="noopener"
         >
           Powered by saviorbp for {' '}
           <span className={styles.logo}>
