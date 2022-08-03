@@ -133,7 +133,6 @@ export default function Home({ dados }) {
           href="https://www.appmasters.io/"
           target="_blank"
           rel="noreferrer"
-          rel="noopener"
         >
           Powered by saviorbp for {' '}
           <span className={styles.logo}>
