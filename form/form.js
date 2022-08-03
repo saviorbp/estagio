@@ -38,13 +38,14 @@ export function FormPersonal({
 
       <div className={styles.form}>
         <h2>Equipamentos que serão doados</h2>
-        <p>Quantidade de equipamentos</p>
+        <label>Quantidade de equipamentos :
         <InputMask className={styles.box} min="1" type="number" name="deviceCount"
           onChange={({ target }) => {
             handleCreateDevice(target.value);
             handleDeleteDevice(target.value);
           }}
-        />
+          />
+          </label>
       </div>
     </div>
   );

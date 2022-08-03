@@ -1,14 +1,15 @@
 import { Form } from '@unform/web';
 import Head from 'next/head';
-import styles from './styles/Home.module.css';
+import styles from '../styles/Home.module.css';
 import { useCallback, useRef, useState } from 'react';
 import * as Yup from 'yup';
-import { FormDevices } from './form/form';
-import { FormPersonal } from './form/form';
+import { FormDevices } from '../form/form';
+import { FormPersonal } from '../form/form';
 import api from './api/api';
-import { fetchCep } from './util/fetchcep';
-import { testeDevice } from './util/testedevice';
+import { fetchCep } from '../util/fetchcep';
+import { testeDevice } from '../util/testedevice';
 import Image from 'next/image';
+import React from 'react';
 
 export default function Home({ dados }) {
   const formRef = useRef();
@@ -99,7 +100,7 @@ export default function Home({ dados }) {
       <Head>
         <title>PC4All</title>
         <meta name="description" content="Doação de computadores usados" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="./favicon.ico" />
       </Head>
       <main className={styles.main}>
 
@@ -132,7 +133,7 @@ export default function Home({ dados }) {
         <a
           href="https://www.appmasters.io/"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
         >
           Powered by saviorbp for {' '}
           <span className={styles.logo}>
