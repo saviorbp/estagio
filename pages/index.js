@@ -11,7 +11,7 @@ import { testeDevice } from '../util/testedevice';
 import Image from 'next/image';
 import React from 'react';
 
-export default function Home({ dados }) {
+export default function Home({dados}) {
   const formRef = useRef();
   const [loading, setLoading] = useState(false);
   const [devices, setDevices] = useState([{ value: '', label: '' }]);
@@ -46,7 +46,7 @@ export default function Home({ dados }) {
     }
     formRef.current.setFieldValue('devices', devices);
   }
-
+  
   async function handleFormSubmit(form) {
     form.deviceCount = parseInt(form.deviceCount);
 
@@ -105,14 +105,13 @@ export default function Home({ dados }) {
       <main className={styles.main}>
 
         <div>
+            <h1 className={styles.title}>Doação de computadores usados</h1>
+            {getApi(dados)}
           <Form className={styles.form}
             initialData={{ deviceCount: 1 }}
             ref={formRef}
             onSubmit={handleFormSubmit}
           >
-            <h1 className={styles.title}>Doação de computadores usados</h1>
-            {getApi(dados)}
-
             <section>
               <FormPersonal
                 setAddress={setAddress}
