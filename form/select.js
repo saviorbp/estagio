@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { useField } from '@unform/core';
-import ReactSelect from 'react-select';
+import ReactSelect, { StylesConfig } from 'react-select';
+import makeAnimated from 'react-select/animated';
+
+const animatedComponents = makeAnimated();
 
 export default function Select({ name, ...rest }) {
   const selectRef = useRef(null);
@@ -21,14 +24,8 @@ export default function Select({ name, ...rest }) {
 
   return (
     <ReactSelect
-      theme={(theme) => ({
-        ...theme,
-        colors: {
-          ...theme.colors,
-          primary25: '#9ca3af',
-          primary: '#4ade80',
-        },
-      })}
+      closeMenuOnSelect={true}
+      components={animatedComponents}
       cacheOptions
       defaultValue={defaultValue}
       ref={selectRef}

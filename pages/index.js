@@ -11,7 +11,7 @@ import { testeDevice } from '../util/testedevice';
 import Image from 'next/image';
 import React from 'react';
 
-export default function Home({dados}) {
+export default function Home({ dados }) {
   const formRef = useRef();
   const [loading, setLoading] = useState(false);
   const [devices, setDevices] = useState([{ value: '', label: '' }]);
@@ -46,7 +46,7 @@ export default function Home({dados}) {
     }
     formRef.current.setFieldValue('devices', devices);
   }
-  
+
   async function handleFormSubmit(form) {
     form.deviceCount = parseInt(form.deviceCount);
 
@@ -96,37 +96,53 @@ export default function Home({dados}) {
   }
 
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>PC4All</title>
         <meta name="description" content="Doação de computadores usados" />
         <link rel="icon" href="./favicon.ico" />
       </Head>
-      <main className={styles.main}>
 
-        <div>
-            <h1 className={styles.title}>Doação de computadores usados</h1>
-            {getApi(dados)}
-          <Form className={styles.form}
-            initialData={{ deviceCount: 1 }}
-            ref={formRef}
-            onSubmit={handleFormSubmit}
-          >
-            <section>
-              <FormPersonal
-                setAddress={setAddress}
-                isLoading={loading}
-                handleCreateDevice={handleCreateDevice}
-                handleDeleteDevice={handleDeleteDevice}
-              />
-            </section>
-            <section>
-              <FormDevices devices={devices} devicesError={devicesError} />
-            </section>
-            <button className={styles.button} type="submit">Enviar</button>
-          </Form>
+      <header>
+        <div class="container">
+          <img
+            src="/appmasters.svg"
+            alt="Pc4All"
+          />
         </div>
-      </main>
+      </header>
+
+      <section class="hero">
+        <div class="container">
+          <div>
+            <h2>
+              Doação de computadores usados
+            </h2>
+            {getApi(dados)}
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.form}>
+        <Form
+          initialData={{ deviceCount: 1 }}
+          ref={formRef}
+          onSubmit={handleFormSubmit}
+        >
+          <section>
+            <FormPersonal
+              setAddress={setAddress}
+              isLoading={loading}
+              handleCreateDevice={handleCreateDevice}
+              handleDeleteDevice={handleDeleteDevice}
+            />
+
+            <FormDevices devices={devices} devicesError={devicesError} />
+
+            <button type="submit" className={styles.button}>Enviar</button>
+          </section>
+        </Form>
+      </section>
 
       <footer className={styles.footer}>
         <a
@@ -146,15 +162,15 @@ export default function Home({dados}) {
 
 function getApi(x) {
   if (x == true) {
-    return <p>API online</p>;
+    return <p class="on">API online</p>;
   } else if (x == false) {
-    return <p>API offline</p>;
+    return <p class="off">API offline</p>;
   }
 }
 
 Home.getInitialProps = async () => {
   const response = await api.get(
-    "https://doar-computador-api.herokuapp.com/"
+    "https://doar-computador.herokuapp.com/"
   );
 
   return { dados: response.data.alive };
