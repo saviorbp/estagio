@@ -1,3 +1,23 @@
+.header {
+  background-color: rgb(10, 182, 255);
+}
+
+.headercontainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 90%;
+  max-width: 980px;
+  
+  margin: auto;
+}
+
+.headerimg {
+  width: 30rem;
+  padding: 15px 0;
+}
+
 .button {
   display: inline-block;
   font-size: 1.6rem;
@@ -131,6 +151,33 @@
   align-items: center;
   width: 50px;
   height: 50px;
+}
+
+.hero {
+  margin: 80px 0;
+}
+
+.hero .container {
+  width: 90%;
+  max-width: 980px;
+
+  margin: auto;
+
+  display: flex;
+}
+
+.on {
+  color: rgb(9, 160, 4);
+  font-size: 1.8rem;
+  line-height: 3.2rem;
+  margin: 10px 0px 0px;
+}
+
+.off {
+  color: rgb(223, 4, 4);
+  font-size: 1.8rem;
+  line-height: 3.2rem;
+  margin: 10px 0px 0px;
 }
 
 @media (max-width: 630px) {

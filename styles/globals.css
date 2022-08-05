@@ -14,25 +14,7 @@ body {
   font-size: 1.6rem;
 }
 
-header {
-  background-color: rgb(10, 182, 255);
-}
 
-header .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  width: 90%;
-  max-width: 980px;
-  
-  margin: auto;
-}
-
-header img {
-  width: 30rem;
-  padding: 15px 0;
-}
 
 h2 {
   color: rgb(75, 75, 75);
@@ -59,31 +41,4 @@ a {
   margin: 0;
   padding: 0;
   outline: 0;
-}
-
-section.hero {
-  margin: 80px 0;
-}
-
-section.hero .container {
-  width: 90%;
-  max-width: 980px;
-
-  margin: auto;
-
-  display: flex;
-}
-
-section.hero p.on {
-  color: rgb(9, 160, 4);
-  font-size: 1.8rem;
-  line-height: 3.2rem;
-  margin: 10px 0px 0px;
-}
-
-section.hero p.off {
-  color: rgb(223, 4, 4);
-  font-size: 1.8rem;
-  line-height: 3.2rem;
-  margin: 10px 0px 0px;
 }

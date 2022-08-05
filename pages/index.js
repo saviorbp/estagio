@@ -103,9 +103,10 @@ export default function Home({ dados }) {
         <link rel="icon" href="./favicon.ico" />
       </Head>
 
-      <header>
-        <div className={styles.container}>
+      <header className={styles.header}>
+        <div className={styles.headercontainer}>
           <img
+          className={styles.headerimg}
             src="/appmasters.svg"
             alt="Pc4All"
           />
