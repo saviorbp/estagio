@@ -104,7 +104,7 @@ export default function Home({ dados }) {
       </Head>
 
       <header>
-        <div class="container">
+        <div className={styles.container}>
           <img
             src="/appmasters.svg"
             alt="Pc4All"
@@ -112,8 +112,8 @@ export default function Home({ dados }) {
         </div>
       </header>
 
-      <section class="hero">
-        <div class="container">
+      <section className={styles.hero}>
+        <div className={styles.container}>
           <div>
             <h2>
               Doação de computadores usados
@@ -162,9 +162,9 @@ export default function Home({ dados }) {
 
 function getApi(x) {
   if (x == true) {
-    return <p class="on">API online</p>;
+    return <p className={styles.on}>API online</p>;
   } else if (x == false) {
-    return <p class="off">API offline</p>;
+    return <p className={styles.off}>API offline</p>;
   }
 }
 
