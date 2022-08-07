@@ -142,10 +142,11 @@ export default function Home({ dados }) {
 
       <header className={styles.header}>
         <div className={styles.headercontainer}>
-          <img
+          <Image
             className={styles.headerimg}
             src="/appmasters.svg"
             alt="Pc4All"
+            width={300} height={80}
           />
         </div>
       </header>
