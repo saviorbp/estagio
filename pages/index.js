@@ -148,6 +148,15 @@ export default function Home({ dados }) {
             alt="Pc4All"
             width={300} height={80}
           />
+          <div className={styles.menusection}>
+            <nav>
+              <ul>
+                <li>
+                  <a href={'/instituicoes'}>Instituições Parceiras</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
       </header>
 
@@ -158,13 +167,8 @@ export default function Home({ dados }) {
               Doação de computadores usados
             </h2>
             {getApi(dados)}
-            <h2>Instituições parceiras</h2>
           </div>
         </div>
-      </section>
-
-      <section>
-        <Instituicoes/>
       </section>
 
       <section className={styles.form}>
