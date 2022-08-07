@@ -1,15 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import ReactInputMask from 'react-input-mask';
+import { useField } from '@unform/core';
 
 React.useLayoutEffect = React.useEffect;
 
-import { useField } from '@unform/core';
-
 export default function InputMask({ name, ...rest }) {
-  const inputRef = useRef(null);
-
+  const inputRef = useRef();
   const { fieldName, registerField, defaultValue, error } = useField(name);
-
   useEffect(() => {
     registerField({
       name: fieldName,

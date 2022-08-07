@@ -8,16 +8,21 @@ export function FormPersonal({
   handleCreateDevice,
   isLoading,
   handleDeleteDevice,
+  handleOnChange
 }) {
   return (
-    <section>
+    <div>
       <h3>Formulário de Doação</h3>
       <div>
         <div className={styles.formgroup}>
-          <InputMask className={styles.inputcm} id="name" name="name" placeholder="nome" />
+          <InputMask className={styles.inputcm} name="name" placeholder="nome" onChange={({ target }) => {
+            handleOnChange('name', target.value);
+          }} />
         </div>
         <div className={styles.formgroup}>
-          <InputMask className={styles.inputcontrol} id="email" type="email" name="email" placeholder="email" />
+          <InputMask className={styles.inputcontrol} id="email" type="email" name="email" placeholder="email" onChange={({ target }) => {
+            handleOnChange('email', target.value);
+          }}/>
           <InputMask className={styles.inputcontrol} id="phone" name="phone" placeholder="telefone" mask="99 999999999" />
         </div>
         <div className={styles.formgroup}>
@@ -30,21 +35,40 @@ export function FormPersonal({
             onChange={({ target }) => {
               const length = target.value.replaceAll('_', '').length;
               if (length === 8) setAddress(target.value);
+              handleOnChange('zip', target.value);
             }}
           />
           {isLoading && <span>Carregando</span>}
-          <InputMask className={styles.inputcontrol} id="city" name="city" placeholder="cidade" />
+          <InputMask className={styles.inputcontrol} id="city" name="city" placeholder="cidade" 
+          onChange={({ target }) => {
+            handleOnChange('city', target.value);
+          }}/>
         </div>
         <div className={styles.formgroup}>
-          <InputMask className={styles.inputcontrol} id="state" name="state" placeholder="estado" />
-          <InputMask className={styles.inputcontrol} id="neighborhood" name="neighborhood" placeholder="Bairro" />
+          <InputMask className={styles.inputcontrol} id="state" name="state" placeholder="estado"
+          onChange={({ target }) => {
+            handleOnChange('state', target.value);
+          }} />
+          <InputMask className={styles.inputcontrol} id="neighborhood" name="neighborhood" placeholder="Bairro" 
+          onChange={({ target }) => {
+            handleOnChange('neighborhood', target.value);
+          }}/>
         </div>
         <div className={styles.formgroup}>
-          <InputMask className={styles.inputcontrol} id="streetAddress" name="streetAddress" placeholder="rua" />
-          <InputMask className={styles.inputcontrol} id="number" name="number" placeholder="número" />
+          <InputMask className={styles.inputcontrol} id="streetAddress" name="streetAddress" placeholder="rua" 
+          onChange={({ target }) => {
+            handleOnChange('streetAddress', target.value);
+          }}/>
+          <InputMask className={styles.inputcontrol} id="number" name="number" placeholder="número" 
+          onChange={({ target }) => {
+            handleOnChange('number', target.value);
+          }}/>
         </div>
         <div className={styles.formgroup}>
-          <InputMask className={styles.inputcm} id="complement" name="complement" placeholder="complemento" />
+          <InputMask className={styles.inputcm} id="complement" name="complement" placeholder="complemento" 
+          onChange={({ target }) => {
+            handleOnChange('complement', target.value);
+          }}/>
         </div>
       </div>
 
@@ -59,7 +83,7 @@ export function FormPersonal({
           }}
         />
       </div>
-    </section>
+    </div>
   );
 }
 

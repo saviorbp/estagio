@@ -22,15 +22,23 @@ export default function Home({ dados }) {
 
     fetchCep(value).then((response) => {
       if (response.city !== undefined) {
+        formRef.current.setFieldValue('state', response.state);
         document.getElementById('state').value = response.state;
+        formRef.current.setFieldValue('city', response.city);
         document.getElementById('city').value = response.city;
+        formRef.current.setFieldValue('streetAddress', response.streetAddress);
         document.getElementById('streetAddress').value = response.streetAddress;
+        formRef.current.setFieldValue('neighborhood', response.neighborhood);
         document.getElementById('neighborhood').value = response.neighborhood;
         document.getElementById('number').focus();
       }
       setLoading(false);
     });
   }, []);
+
+  async function handleOnChange(name,value) {
+    formRef.current.setFieldValue(name, value);
+  }
 
   async function handleCreateDevice(deviceCount) {
     var newDevice = { value: '', label: '' };
@@ -49,15 +57,43 @@ export default function Home({ dados }) {
 
   async function handleFormSubmit(form) {
     form.deviceCount = parseInt(form.deviceCount);
-
+    form.phone = form.phone.replace(/[\s()-]/g, '');
+    {console.log(form)}
     const data = JSON.stringify(form);
 
     try {
+      formRef.current.setErrors({});
+
+      const schema = Yup.object().shape({
+        name: Yup.string().required('*O nome é obrigatório'),
+        email: Yup.string(),
+        phone: Yup.string()
+          .transform((value) => value.replaceAll('_', ''))
+          .min(12, 'Telefone inválido')
+          .required('*O telefone é obrigatório'),
+        zip: Yup.string().required('*O cep é obrigatório'),
+        city: Yup.string().required('*A cidade é obrigatória'),
+        state: Yup.string().required('*O estado é obrigatório'),
+        streetAddress: Yup.string().required('*A rua é obrigatória'),
+        number: Yup.string().required('*O número é obrigatório'),
+        complement: Yup.string(),
+        neighborhood: Yup.string().required(
+          '*O ponto de referência é obrigatório'
+        ),
+        deviceCount: Yup.number()
+          .required()
+          .integer()
+          .moreThan(0, 'O número de equipamentos é obrigatório'),
+      });
 
       form.devices.forEach((device) => {
         if (device.type == undefined || device.condition == undefined) {
           setDevicesError(true);
         } else setDevicesError(false);
+      });
+
+      await schema.validate(form, {
+        abortEarly: false,
       });
 
       const devicesPassed = await testeDevice(form);
@@ -77,18 +113,19 @@ export default function Home({ dados }) {
           });
       } else
         alert(
-          ' dados inválidos ou faltando precisamos de todos os dados para a doação \nStatus 400'
+          ' dados faltando precisamos de todos os dados para a doação \nStatus '+
+          error.response.status
         );
     } catch (err) {
       var validationErrors = {};
-
       if (err instanceof Yup.ValidationError) {
         err.inner.forEach((error) => {
           validationErrors[error.path] = error.message;
+          {console.log(error)}
         });
       }
       formRef.current.setErrors(validationErrors);
-
+      
       alert(
         'Dados faltantes ou errados. Corrigir antes de enviar novamente. \nStatus 400'
       );
@@ -106,7 +143,7 @@ export default function Home({ dados }) {
       <header className={styles.header}>
         <div className={styles.headercontainer}>
           <img
-          className={styles.headerimg}
+            className={styles.headerimg}
             src="/appmasters.svg"
             alt="Pc4All"
           />
@@ -120,8 +157,271 @@ export default function Home({ dados }) {
               Doação de computadores usados
             </h2>
             {getApi(dados)}
+            <h2>Instituições parceiras</h2>
           </div>
         </div>
+      </section>
+
+      <section className={styles.cards}>
+        <div className={styles.card}>
+          <div className={styles.content}>
+            <h3>
+              criança acolhida
+            </h3>
+            <div className={styles.info}>
+              <ul className={styles.textmedium}>
+                <li>São joão</li>
+                <li>São Paulo</li>
+                <li>Instituição focado no acolhimento de crianças e adolescentes </li>
+                <li>Nosso site:<a
+                  href="https://www.appmasters.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > www.criancaacolhida.com.br</a></li>
+              </ul>
+                <div className={styles.carde}>
+                <a
+                  href="https://www.appmasters.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > <span className={styles.logo}>
+                    <Image src="/Instagram.svg" alt="App Masters Logo" width={50} height={50} />
+                  </span></a>
+                <a
+                  href="https://www.appmasters.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > <span className={styles.logo}>
+                    <Image src="/Facebook.svg" alt="App Masters Logo" width={50} height={50} />
+                  </span></a>
+                <a
+                  href="https://www.appmasters.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > <span className={styles.logo}>
+                    <Image src="/WhatsApp.svg" alt="App Masters Logo" width={50} height={50} />
+                  </span></a>
+                  </div>
+            </div>
+          </div>
+        </div>
+        
+        <div className={styles.card}>
+          <div className={styles.content}>
+            <h3>
+              criança acolhida
+            </h3>
+            <div className={styles.info}>
+              <ul className={styles.textmedium}>
+                <li>São joão</li>
+                <li>São Paulo</li>
+                <li>Instituição focado no acolhimento de crianças e adolescentes </li>
+                <li>Nosso site:<a
+                  href="https://www.appmasters.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > www.criancaacolhida.com.br</a></li>
+              </ul>
+                <div className={styles.carde}>
+                <a
+                  href="https://www.appmasters.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > <span className={styles.logo}>
+                    <Image src="/Instagram.svg" alt="App Masters Logo" width={50} height={50} />
+                  </span></a>
+                <a
+                  href="https://www.appmasters.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > <span className={styles.logo}>
+                    <Image src="/Facebook.svg" alt="App Masters Logo" width={50} height={50} />
+                  </span></a>
+                <a
+                  href="https://www.appmasters.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > <span className={styles.logo}>
+                    <Image src="/WhatsApp.svg" alt="App Masters Logo" width={50} height={50} />
+                  </span></a>
+                  </div>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.card}>
+          <div className={styles.content}>
+            <h3>
+              criança acolhida
+            </h3>
+            <div className={styles.info}>
+              <ul className={styles.textmedium}>
+                <li>São joão</li>
+                <li>São Paulo</li>
+                <li>Instituição focado no acolhimento de crianças e adolescentes </li>
+                <li>Nosso site:<a
+                  href="https://www.appmasters.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > www.criancaacolhida.com.br</a></li>
+              </ul>
+                <div className={styles.carde}>
+                <a
+                  href="https://www.appmasters.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > <span className={styles.logo}>
+                    <Image src="/Instagram.svg" alt="App Masters Logo" width={50} height={50} />
+                  </span></a>
+                <a
+                  href="https://www.appmasters.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > <span className={styles.logo}>
+                    <Image src="/Facebook.svg" alt="App Masters Logo" width={50} height={50} />
+                  </span></a>
+                <a
+                  href="https://www.appmasters.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > <span className={styles.logo}>
+                    <Image src="/WhatsApp.svg" alt="App Masters Logo" width={50} height={50} />
+                  </span></a>
+                  </div>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.card}>
+          <div className={styles.content}>
+            <h3>
+              criança acolhida
+            </h3>
+            <div className={styles.info}>
+              <ul className={styles.textmedium}>
+                <li>São joão</li>
+                <li>São Paulo</li>
+                <li>Instituição focado no acolhimento de crianças e adolescentes </li>
+                <li>Nosso site:<a
+                  href="https://www.appmasters.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > www.criancaacolhida.com.br</a></li>
+              </ul>
+                <div className={styles.carde}>
+                <a
+                  href="https://www.appmasters.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > <span className={styles.logo}>
+                    <Image src="/Instagram.svg" alt="App Masters Logo" width={50} height={50} />
+                  </span></a>
+                <a
+                  href="https://www.appmasters.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > <span className={styles.logo}>
+                    <Image src="/Facebook.svg" alt="App Masters Logo" width={50} height={50} />
+                  </span></a>
+                <a
+                  href="https://www.appmasters.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > <span className={styles.logo}>
+                    <Image src="/WhatsApp.svg" alt="App Masters Logo" width={50} height={50} />
+                  </span></a>
+                  </div>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.card}>
+          <div className={styles.content}>
+            <h3>
+              criança acolhida
+            </h3>
+            <div className={styles.info}>
+              <ul className={styles.textmedium}>
+                <li>São joão</li>
+                <li>São Paulo</li>
+                <li>Instituição focado no acolhimento de crianças e adolescentes </li>
+                <li>Nosso site:<a
+                  href="https://www.appmasters.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > www.criancaacolhida.com.br</a></li>
+              </ul>
+                <div className={styles.carde}>
+                <a
+                  href="https://www.appmasters.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > <span className={styles.logo}>
+                    <Image src="/Instagram.svg" alt="App Masters Logo" width={50} height={50} />
+                  </span></a>
+                <a
+                  href="https://www.appmasters.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > <span className={styles.logo}>
+                    <Image src="/Facebook.svg" alt="App Masters Logo" width={50} height={50} />
+                  </span></a>
+                <a
+                  href="https://www.appmasters.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > <span className={styles.logo}>
+                    <Image src="/WhatsApp.svg" alt="App Masters Logo" width={50} height={50} />
+                  </span></a>
+                  </div>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.card}>
+          <div className={styles.content}>
+            <h3>
+              criança acolhida
+            </h3>
+            <div className={styles.info}>
+              <ul className={styles.textmedium}>
+                <li>São Benedito</li>
+                <li>São Paulo</li>
+                <li>Instituição focado no acolhimento de crianças e adolescentes </li>
+                <li>Nosso site:<a
+                  href="https://www.appmasters.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > www.criancaacolhida.com.br</a></li>
+              </ul>
+                <div className={styles.carde}>
+                <a
+                  href="https://www.appmasters.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > <span className={styles.logo}>
+                    <Image src="/Instagram.svg" alt="App Masters Logo" width={50} height={50} />
+                  </span></a>
+                <a
+                  href="https://www.appmasters.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > <span className={styles.logo}>
+                    <Image src="/Facebook.svg" alt="App Masters Logo" width={50} height={50} />
+                  </span></a>
+                <a
+                  href="https://www.appmasters.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > <span className={styles.logo}>
+                    <Image src="/WhatsApp.svg" alt="App Masters Logo" width={50} height={50} />
+                  </span></a>
+                  </div>
+            </div>
+          </div>
+        </div>
+
+        
       </section>
 
       <section className={styles.form}>
@@ -136,6 +436,7 @@ export default function Home({ dados }) {
               isLoading={loading}
               handleCreateDevice={handleCreateDevice}
               handleDeleteDevice={handleDeleteDevice}
+              handleOnChange={handleOnChange}
             />
 
             <FormDevices devices={devices} devicesError={devicesError} />

@@ -36,6 +36,53 @@
   opacity: 0.9;
 }
 
+.cards {
+  width: 90%;
+  max-width: 980px;
+  margin: auto;
+  padding-bottom: 5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+}
+
+.textmedium {
+  font-size: 1.6rem;
+  line-height: 2.6rem;
+  font-weight: 400;
+  color: #ecf0f1;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(10, 182, 255);
+  transition: all 0.3s ease 0s;
+}
+
+.card:hover {
+  transform: translateY(-7px);
+}
+
+.title {
+  margin: 1rem;
+  color: black;
+}
+
+.info {
+  display: flex;
+  align-self: end;
+  align-items: center;
+  padding-left: 1rem;
+  flex-direction: column;
+}
+
+.carde{
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+}
+
 .form {
   width:100%;
   background: rgb(10, 182, 255);
@@ -160,10 +207,9 @@
 .hero .container {
   width: 90%;
   max-width: 980px;
-
   margin: auto;
-
   display: flex;
+  justify-content: center;
 }
 
 .on {
