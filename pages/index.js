@@ -8,7 +8,7 @@ import { Form } from '@unform/web';
 import { useCallback, useRef, useState } from 'react';
 import { FormDevices } from '../form/form';
 import { FormPersonal } from '../form/form';
-import { Insti } from './instituicoes';
+import  Instituicoes  from './instituicoes';
 import { fetchCep } from '../util/fetchcep';
 import { testeDevice } from '../util/testedevice';
 
@@ -142,7 +142,7 @@ export default function Home({ dados }) {
 
       <header className={styles.header}>
         <div className={styles.headercontainer}>
-          <Image
+          <img
             className={styles.headerimg}
             src="/appmasters.svg"
             alt="Pc4All"
@@ -163,7 +163,7 @@ export default function Home({ dados }) {
       </section>
 
       <section>
-        <Insti/>
+        <Instituicoes/>
       </section>
 
       <section className={styles.form}>

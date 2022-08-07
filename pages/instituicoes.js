@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 import styles from '../styles/Home.module.css';
 
-export default function Insti() {
+export default function Instituicoes() {
 return(
   <section className={styles.cards}>
     <div className={styles.card}>
