@@ -23,7 +23,11 @@ export function FormPersonal({
           <InputMask className={styles.inputcontrol} id="email" type="email" name="email" placeholder="email" onChange={({ target }) => {
             handleOnChange('email', target.value);
           }}/>
-          <InputMask className={styles.inputcontrol} id="phone" name="phone" placeholder="telefone" mask="99 999999999" />
+          <InputMask className={styles.inputcontrol} id="phone" name="phone" placeholder="telefone" mask="99999999999" 
+          onChange={({ target }) => {
+            const length = target.value.replaceAll(/[\s()-]/g, '').length;
+            handleOnChange('phone', target.value);
+          }}/>
         </div>
         <div className={styles.formgroup}>
           <InputMask

@@ -6,6 +6,6 @@ export async function testeDevice(form) {
       value = false;
     else value = true;
   });
-  {console.log(value)}
+  
   return { value };
 }
