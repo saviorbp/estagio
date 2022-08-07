@@ -63,7 +63,7 @@ export function FormPersonal({
           onChange={({ target }) => {
             handleOnChange('streetAddress', target.value);
           }}/>
-          <InputMask className={styles.inputcontrol} id="number" name="number" placeholder="número" 
+          <InputMask className={styles.inputcontrol} id="number" name="number" type="number" placeholder="número"
           onChange={({ target }) => {
             handleOnChange('number', target.value);
           }}/>

@@ -1,0 +1,26 @@
+document.current.setErrors({});
+
+      const schema = Yup.object().shape({
+        name: Yup.string().required('*Campo nome é obrigatório'),
+        email: Yup.string().required('*Campo email é obrigatório'),
+        phone: Yup.string()
+          .transform((value) => value.replaceAll('_', ''))
+          .min(12, 'numero faltando ou inválido')
+          .required('*Campo telefone é obrigatório'),
+        zip: Yup.string().required('*Campo cep é obrigatório'),
+        city: Yup.string().required('*Campo cidade é obrigatória'),
+        state: Yup.string().required('*Campo estado é obrigatório'),
+        streetAddress: Yup.string().required('*Campo rua é obrigatória'),
+        number: Yup.string().required('*Campo número é obrigatório'),
+        complement: Yup.string().required(
+          '* O campo ponto de referência é muito importante para que cheguemos a doação'),
+        neighborhood: Yup.string().required('* O campo bairro e obrigatório'),
+        deviceCount: Yup.number()
+          .required()
+          .integer()
+          .moreThan(0, 'A quantidade de equipamentos é obrigatório'),
+      });
+
+await schema.validate(form, {
+        abortEarly: false,
+      });
