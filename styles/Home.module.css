@@ -50,6 +50,20 @@
   transition: all 150ms linear 0s;
 }
 
+.button1 {
+  display: flex;
+  font-size: 1.5rem;
+  color: black;
+  background-color: rgb(10, 182, 255);
+  margin: 1rem;
+  padding: 0.2rem 0rem 0.2rem 1rem;
+  text-decoration: none;
+  border-radius: 5px;
+  border-color: black;
+  transition: all 150ms linear 0s;
+}
+
+.button1:hover,
 .button:hover {
   opacity: 0.9;
 }
@@ -411,6 +425,22 @@
     margin: 1rem;
     padding: 2vh;
     width: 20rem;
+    font-size: 1.6rem;
+    align-items: center;
+  }
+}
+
+@media (max-width: 290px) {
+  .form h3 {
+    font-size: 2rem;
+  }
+  .formgroup .inputcontrol,
+  .formgroup .inputcm {
+    flex: 1 1;
+    display: flex;
+    margin: 1rem;
+    padding: 2vh;
+    width: 15rem;
     font-size: 1.6rem;
     align-items: center;
   }

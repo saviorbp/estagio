@@ -80,7 +80,7 @@ export function FormPersonal({
 
       <div className={styles.InputMask}>
         <p>Quantidade de equipamentos :</p>
-        <InputMask className={styles.button} min="1" type="number" name="deviceCount"
+        <InputMask className={styles.button1} min="1" type="number" name="deviceCount"
           onChange={({ target }) => {
             handleCreateDevice(target.value);
             handleDeleteDevice(target.value);
