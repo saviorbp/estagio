@@ -8,7 +8,6 @@ import { Form } from '@unform/web';
 import { useCallback, useRef, useState } from 'react';
 import { FormDevices } from '../form/form';
 import { FormPersonal } from '../form/form';
-import  Instituicoes  from './instituicoes';
 import { fetchCep } from '../util/fetchcep';
 import { testeDevice } from '../util/testedevice';
 
